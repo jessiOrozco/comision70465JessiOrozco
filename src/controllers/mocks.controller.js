@@ -1,7 +1,6 @@
-import { adoptionsService, petsService, usersService } from "../services/index.js";
-import Pet from '../dao/Pets.dao.js';
+import { petsService, usersService } from "../services/index.js";
 import mocks from "../utils/mocks.js";
-import pet from "../dao/models/Pet.js";
+
 
 const mockingpets = async (req,res) => {
     let { cantidad, grabaDB } = req.query;
@@ -36,7 +35,7 @@ const mockingusers = async (req,res) => {
     let users = [];
     try {
         for(let i = 0; i < cantidad; i++){
-            users.push(mocks.createUserMocks());
+            users.push( await mocks.createUserMocks());
         }
         if(grabaDB){
             users = await Promise.all(users.map(async (user) => {
